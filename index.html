@@ -5,6 +5,9 @@
 <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.4.2/pure-min.css">
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
 <link rel="stylesheet" href="http://www.purecss.io/combo/1.11.2?/css/main-grid.css&/css/layouts/marketing.css">
+<style type="text/css">
+.splash-container, .splash { height: 100%; }
+</style>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 </head>
 <body>
@@ -23,27 +26,32 @@
 
 <div class="splash-container">
   <div class="splash">
-    <h2 class="content-head is-center">Set up your variables.</h2>
-      <form class="pure-form pure-form-aligned">
-        <fieldset>
-          <div class="pure-control-group">
-            <label for="reals">Real-valued variables</label>
-            <input id="reals" type="text" placeholder="x, y, z" />
-          </div>
-          <div class="pure-control-group">
-            <label for="ints">Integer-valued variables</label>
-            <input id="ints" type="text" placeholder="n, m, k" />
-          </div>
-          <div class="pure-control-group">
-            <label for="eqn">Answer equation</label>
-            <input id="eqn" type="text" placeholder="x^2 / (n!)" />
-          </div>
-          <div class="pure-controls">
-            <button type="submit" class="pure-button pure-button-primary">Submit</button>
-          </div>
-        </fieldset>
-      </form>
-    </h2>
+    <h2 class="content-head is-center">Set up your equation.</h2>
+    <form class="pure-form">
+      <fieldset>
+        <div class="pure-control-group">
+          <label for="reals">Real-valued variables</label>
+          <input id="reals" type="text" placeholder="x, y, z" />
+        </div>
+        <div class="pure-control-group">
+          <label for="ints">Integer-valued variables</label>
+          <input id="ints" type="text" placeholder="n, m, k" />
+        </div>
+        <div class="pure-control-group">
+          <label for="eqn">Answer equation</label>
+          <input id="eqn" type="text" placeholder="x^2 / (n!)" />
+        </div>
+        <div class="pure-controls">
+          <a href="" class="pure-button pure-button-primary">Format</a>
+        </div>
+      </fieldset>
+    </form>
+    <div id="eqn-result">
+      <h2 class="content-head is-center">Copy this output.</h2>
+      <textarea rows="3" style="width: 100%; padding: 8pt">
+        Press the "Format" button above to generate your output.
+      </textarea>
+    </div>
   </div>
 </div>
 
