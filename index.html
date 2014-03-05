@@ -13,6 +13,17 @@
 <script type="text/javascript">
 $('document').ready(function() {
     $('#btn-format').click(function() {
+        var splitPattern = /[\s]+/;
+        var reals = $('#reals').val().split(splitPattern);
+        var ints = $('#ints').val().split(splitPattern);
+        var eqn = $('#eqn').val();
+
+        var result = '';
+        result += "<EQN $PAD='calc'; ";
+        if (ints[0] != '') {
+            // there is an integer value
+        }
+
         $('#result-text').val('You clicked format.');
     });
 });
