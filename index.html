@@ -48,32 +48,34 @@ $(document).ready(function() {
         }
         result += "''>";
 
-        for (var i = 0; i < allVars.length; i++) {
-            result += allVars[i];
-            if (i + 1 < allVars.length) {
-                result += ",";
+        if (numVars > 0) {
+            for (var i = 0; i < allVars.length; i++) {
+                result += allVars[i];
+                if (i + 1 < allVars.length) {
+                    result += ",";
+                }
             }
-        }
-        result += ":";
-        
-        var regex = "(";
-        for (var i = 0; i < allVars.length; i++) {
-            // quote and add to regex
-            regex += allVars[i].replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1");
-            if (i + 1 < allVars.length) {
-                regex += "|";
+            result += ":";
+            
+            var regex = "(";
+            for (var i = 0; i < allVars.length; i++) {
+                // quote and add to regex
+                regex += allVars[i].replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1");
+                if (i + 1 < allVars.length) {
+                    regex += "|";
+                }
             }
-        }
-        regex += ")";
-        regex = RegExp(regex, 'g');
+            regex += ")";
+            regex = RegExp(regex, 'g');
 
-        var functions = 'sqrt rootn root abs log ln sin cos tan cot sec csc arcsin arccos arctan arccot arcsec arccsc sinh cosh tanh coth sech csch'.split(' ');
-        for (var i = 0; i < functions.length; i++) {
-            eqn = eqn.replace(functions[i], functions[i].toUpperCase());
-        }
-        eqn = eqn.replace(regex, "(<EQN $$$1>)");
-        for (var i = 0; i < functions.length; i++) {
-            eqn = eqn.replace(functions[i].toUpperCase(), functions[i].toLowerCase());
+            var functions = 'sqrt rootn root abs log ln sin cos tan cot sec csc arcsin arccos arctan arccot arcsec arccsc sinh cosh tanh coth sech csch'.split(' ');
+            for (var i = 0; i < functions.length; i++) {
+                eqn = eqn.replace(functions[i], functions[i].toUpperCase());
+            }
+            eqn = eqn.replace(regex, "(<EQN $$$1>)");
+            for (var i = 0; i < functions.length; i++) {
+                eqn = eqn.replace(functions[i].toUpperCase(), functions[i].toLowerCase());
+            }
         }
 
         result += eqn;
