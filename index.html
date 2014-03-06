@@ -6,25 +6,79 @@
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
 <link rel="stylesheet" href="http://www.purecss.io/combo/1.11.2?/css/main-grid.css&/css/layouts/marketing.css">
 <style type="text/css">
+.content-head { color: white; }
 .splash-container, .splash { height: 100%; }
 #result-text { width: 100%; padding: 8pt; }
 </style>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 <script type="text/javascript">
-$('document').ready(function() {
+$(document).ready(function() {
     $('#btn-format').click(function() {
-        var splitPattern = /[\s]+/;
+        var splitPattern = /[\s,]+/;
         var reals = $('#reals').val().split(splitPattern);
         var ints = $('#ints').val().split(splitPattern);
-        var eqn = $('#eqn').val();
+        var eqn = $('#eqn').val().toLowerCase();
+
+        if (reals[0] === '') reals = [];
+        if (ints[0]  === '') ints  = [];
+
+        for (var i = 0; i < reals.length; i++) reals[i] = reals[i].toLowerCase();
+        for (var i = 0; i < ints.length;  i++) ints [i] =  ints[i].toLowerCase();
+
+        var allVars = reals.concat(ints);
+
+        var numReals = reals.length;
+        var numInts =  ints.length;
+        var numVars = allVars.length;
 
         var result = '';
         result += "<EQN $PAD='calc'; ";
-        if (ints[0] != '') {
-            // there is an integer value
+        if (numInts > 0) {
+            result += "$DEFAULTVALS=[";
+            for (var i = 0; i < reals.length; i++) {
+                result += "[],"
+            }
+            for (var i = 0; i < ints.length; i++) {
+                result += "[8..12]";
+                if (i + 1 < ints.length) {
+                    result += ",";
+                }
+            }
+            result += "]; "
+        }
+        result += "''>";
+
+        for (var i = 0; i < allVars.length; i++) {
+            result += allVars[i];
+            if (i + 1 < allVars.length) {
+                result += ",";
+            }
+        }
+        result += ":";
+        
+        var regex = "(";
+        for (var i = 0; i < allVars.length; i++) {
+            // quote and add to regex
+            regex += allVars[i].replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1");
+            if (i + 1 < allVars.length) {
+                regex += "|";
+            }
+        }
+        regex += ")";
+        regex = RegExp(regex, 'g');
+
+        var functions = 'sqrt rootn root abs log ln sin cos tan cot sec csc arcsin arccos arctan arccot arcsec arccsc sinh cosh tanh coth sech csch'.split(' ');
+        for (var i = 0; i < functions.length; i++) {
+            eqn = eqn.replace(functions[i], functions[i].toUpperCase());
+        }
+        eqn = eqn.replace(regex, "(<EQN $$$1>)");
+        for (var i = 0; i < functions.length; i++) {
+            eqn = eqn.replace(functions[i].toUpperCase(), functions[i].toLowerCase());
         }
 
-        $('#result-text').val('You clicked format.');
+        result += eqn;
+
+        $('#result-text').val(result);
     });
 });
 </script>
