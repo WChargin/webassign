@@ -6,8 +6,10 @@
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
 <link rel="stylesheet" href="http://www.purecss.io/combo/1.11.2?/css/main-grid.css&/css/layouts/marketing.css">
 <style type="text/css">
+body { background: #1f8dd6; }
 .content-head { color: white; }
-.splash-container, .splash { height: 100%; }
+.splash-container { position: absolute !important; }
+.splash-container, .splash { height: 100%; overflow: visible !important; }
 #result-text { width: 100%; padding: 8pt; }
 </style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
@@ -130,6 +132,7 @@ $(document).ready(function() {
       <h2 class="content-head is-center">Copy this output.</h2>
       <textarea rows="3" id="result-text" placeholder="Press the &ldquo;Format&rdquo; button above to generate your output."></textarea>
     </div>
+    <div style="height: 3em;"><!-- padding --></div>
   </div>
 </div>
 
