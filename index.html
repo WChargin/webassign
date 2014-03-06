@@ -17,6 +17,7 @@ $(document).ready(function() {
         var splitPattern = /[\s,]+/;
         var reals = $('#reals').val().split(splitPattern);
         var ints = $('#ints').val().split(splitPattern);
+        var reds = $('#reds').val().split(splitPattern);
         var eqn = $('#eqn').val().toLowerCase();
 
         if (reals[0] === '') reals = [];
@@ -58,10 +59,10 @@ $(document).ready(function() {
             result += ":";
             
             var regex = "(";
-            for (var i = 0; i < allVars.length; i++) {
+            for (var i = 0; i < reds.length; i++) {
                 // quote and add to regex
-                regex += allVars[i].replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1");
-                if (i + 1 < allVars.length) {
+                regex += reds[i].replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1");
+                if (i + 1 < reds.length) {
                     regex += "|";
                 }
             }
@@ -111,6 +112,10 @@ $(document).ready(function() {
         <div class="pure-control-group">
           <label for="ints">Integer-valued variables</label>
           <input id="ints" type="text" placeholder="n, m, k" />
+        </div>
+        <div class="pure-control-group">
+          <label for="reds">Red numbers</label>
+          <input id="reds" type="text" placeholder="a, b, c" />
         </div>
         <div class="pure-control-group">
           <label for="eqn">Answer equation</label>
