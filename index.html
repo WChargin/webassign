@@ -24,14 +24,17 @@ $(document).ready(function() {
 
         if (reals[0] === '') reals = [];
         if (ints[0]  === '') ints  = [];
+        if (reds[0]  === '') reds  = [];
 
         for (var i = 0; i < reals.length; i++) reals[i] = reals[i].toLowerCase();
         for (var i = 0; i < ints.length;  i++) ints [i] =  ints[i].toLowerCase();
+        for (var i = 1; i < reds.length;  i++) reds [i] =  reds[i].toLowerCase();
 
         var allVars = reals.concat(ints);
 
         var numReals = reals.length;
         var numInts =  ints.length;
+        var numReds = reds.length;
         var numVars = allVars.length;
 
         var result = '';
@@ -60,24 +63,26 @@ $(document).ready(function() {
             }
             result += ":";
             
-            var regex = "(";
-            for (var i = 0; i < reds.length; i++) {
-                // quote and add to regex
-                regex += reds[i].replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1");
-                if (i + 1 < reds.length) {
-                    regex += "|";
+            if (numReds > 0) {
+                var regex = "(";
+                for (var i = 0; i < reds.length; i++) {
+                    // quote and add to regex
+                    regex += reds[i].replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1");
+                    if (i + 1 < reds.length) {
+                        regex += "|";
+                    }
                 }
-            }
-            regex += ")";
-            regex = RegExp(regex, 'g');
+                regex += ")";
+                regex = RegExp(regex, 'g');
 
-            var functions = 'sqrt rootn root abs log ln sin cos tan cot sec csc arcsin arccos arctan arccot arcsec arccsc sinh cosh tanh coth sech csch'.split(' ');
-            for (var i = 0; i < functions.length; i++) {
-                eqn = eqn.replace(functions[i], functions[i].toUpperCase());
-            }
-            eqn = eqn.replace(regex, "(<EQN $$$1>)");
-            for (var i = 0; i < functions.length; i++) {
-                eqn = eqn.replace(functions[i].toUpperCase(), functions[i].toLowerCase());
+                var functions = 'sqrt rootn root abs log ln sin cos tan cot sec csc arcsin arccos arctan arccot arcsec arccsc sinh cosh tanh coth sech csch'.split(' ');
+                for (var i = 0; i < functions.length; i++) {
+                    eqn = eqn.replace(functions[i], functions[i].toUpperCase());
+                }
+                eqn = eqn.replace(regex, "(<EQN $$$1>)");
+                for (var i = 0; i < functions.length; i++) {
+                    eqn = eqn.replace(functions[i].toUpperCase(), functions[i].toLowerCase());
+                }
             }
         }
 
