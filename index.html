@@ -2,15 +2,13 @@
 <html>
 <head>
 <title>WebAssign answer formatter</title>
-<link rel="stylesheet" href="//yui.yahooapis.com/pure/0.4.2/pure-min.css">
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-<link rel="stylesheet" href="//www.purecss.io/combo/1.11.2?/css/main-grid.css&/css/layouts/marketing.css">
+<link rel="stylesheet" href="css.css">
 <style type="text/css">
 body { background: #1f8dd6; }
 .content-head { color: white; }
 .splash-container { position: absolute !important; }
 .splash-container, .splash { height: 100%; overflow: visible !important; }
-#result-text { width: 100%; padding: 8pt; }
+#result-text { width: 100%; padding: 8pt; font-family: monospace; }
 </style>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -21,7 +19,7 @@ body { background: #1f8dd6; }
   ga('create', 'UA-2678841-7', 'wchargin.github.io');
   ga('send', 'pageview');
 </script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $('#btn-format').click(function() {
